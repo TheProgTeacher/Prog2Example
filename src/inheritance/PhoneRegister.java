@@ -18,6 +18,12 @@ public class PhoneRegister {
 		scan = new Scanner(System.in);
 		phones = new ArrayList<>();
 		
+		Phone p1 = new Phone("xs", "Android");
+		IPhone p2 = new IPhone("xl", true);
+		
+		phones.add(p1);
+		phones.add(p2);
+		
 		boolean running = true;
 		while(running) {
 			out.print(menu + '\n' + '>');
@@ -35,7 +41,9 @@ public class PhoneRegister {
 						out.println(p);
 					break;
 				case 3 :
-					
+					for(Phone p : phones)
+						if(p instanceof IPhone)
+							out.println(p);
 					break;
 				case 4:
 					running = false;
