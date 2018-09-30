@@ -4,6 +4,7 @@ package basics.classes;
 public class Dog {
 	public static final String sound = "BARK!";
 	public final String name;
+	
 	private boolean sleeping;
 	private int legs;
 	private DogColor color;
