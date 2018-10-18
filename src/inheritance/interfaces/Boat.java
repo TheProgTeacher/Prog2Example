@@ -1,10 +1,9 @@
 package inheritance.interfaces;
 
-public class Boat extends Vehicle{
+public class Boat implements Vehicle{
 	int deadweight;
 	
 	Boat(int w, double s, int d) {
-		super(w, s);
 		deadweight = d;
 	}
 	
@@ -15,5 +14,10 @@ public class Boat extends Vehicle{
 			return "turned right";
 		else
 			return "going straight";
+	}
+	
+	@Override
+	public void changeSpeed(double s) {
+		
 	}
 }
