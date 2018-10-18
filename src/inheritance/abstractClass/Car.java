@@ -13,7 +13,7 @@ public class Car extends Vehicle{
 	}
 	
 	@Override
-	public double changeSpeed(double s) {
+	public double changeSpeed() {
 		return horsepower * 10;
 	}
 }

@@ -9,5 +9,5 @@ public abstract class Vehicle {
 		speed = s;
 	}
 	
-	abstract double changeSpeed(double s);
+	abstract double changeSpeed();
 }

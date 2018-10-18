@@ -18,7 +18,7 @@ public class Boat extends Vehicle{
 	}
 	
 	@Override
-	double changeSpeed(double s) {
+	double changeSpeed() {
 		return 10000 / deadweight;
 	}
 }
