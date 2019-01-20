@@ -11,6 +11,10 @@ public class Main {
 	}
 }
 
+class Deck2<TYPE> {
+	private ArrayList<TYPE> cards = new ArrayList<>();
+}
+
 class Deck {
 	private ArrayList<Card> cards = new ArrayList<>();
 	
