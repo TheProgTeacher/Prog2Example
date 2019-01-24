@@ -5,17 +5,22 @@
 package javafx;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.Font;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.Orientation;
+
+import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 
 /*
  * The main class of the application.
@@ -25,38 +30,56 @@ public class SimpleGUI extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	//Constants
+	final Insets defMargins = new Insets(10);
 	
+	//Class variables
 	static Text txt;
+	static TextField txtField;
 	
-	@Override
 	//In this method you define how your window is going to look
-	public void start(Stage primaryStage) {
+	@Override
+	public void start(Stage stage) {
 		try {
+			//Initial setups
 			BorderPane rootPane = new BorderPane();
 			Scene scene = new Scene(rootPane, 400, 400);
 			
+			//Setting up the main panes of the window
+			FlowPane centerPane = new FlowPane();
+			centerPane.setAlignment(Pos.CENTER);
+			centerPane.setOrientation(Orientation.VERTICAL);
+			rootPane.setCenter(centerPane);
+			
 			FlowPane bottomPane = new FlowPane();
-			Insets margins = new Insets(10);
 			bottomPane.setAlignment(Pos.CENTER);
 			rootPane.setBottom(bottomPane);
 			
+			//Setting up class variable components
 			Menu.setState(Menu.MAIN);
 			txt = new Text(Menu.getMenuText());
 			txt.setFont(new Font(36));
-			rootPane.setCenter(txt);
+			centerPane.getChildren().add(txt);
 			
+			txtField = new TextField();
+			txtField.setMaxWidth(100);
+			centerPane.getChildren().add(txtField);
+			
+			//Setting up local variable components
 			Button btn1 = new Button("Action 1");
 			btn1.setOnAction(new Btn1Action());
 			bottomPane.getChildren().add(btn1);
-			FlowPane.setMargin(btn1, margins);
+			FlowPane.setMargin(btn1, defMargins);
 			
 			Button btn2 = new Button("Action 2");
 			btn2.setOnAction(new Btn2Action());
 			bottomPane.getChildren().add(btn2);
-			FlowPane.setMargin(btn2, margins);
+			FlowPane.setMargin(btn2, defMargins);
 			
-			primaryStage.setScene(scene);
-			primaryStage.show();
+			//Final setup
+			stage.setTitle("Window example");
+			stage.setScene(scene);
+			stage.show();
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -73,10 +96,10 @@ class Btn1Action implements EventHandler<ActionEvent> {
 			Menu.setState(Menu.FIRST);
 			break;
 		case FIRST:
-			System.out.println("FIZZ");
+			SimpleGUI.txtField.setText("FIZZ");
 			break;
 		case SECOND:
-			System.out.println("BUZZ");
+			SimpleGUI.txtField.setText("BUZZ");
 			break;
 		}
 		SimpleGUI.txt.setText(Menu.getMenuText());
@@ -127,4 +150,3 @@ enum Menu {
 		}
 	}
 }
-
