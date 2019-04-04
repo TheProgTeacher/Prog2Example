@@ -34,38 +34,38 @@ public class Deck {
 		Collections.sort(cards, comp);
 	}
 
-	public boolean greaterThan(Deck d) {
-		if(royalStreightFlush()) {
-
-		}
-		else if(streightFlush()) {
-			
-		}
-		else if(fourOfAKind()) {
-			
-		}
-		else if(fullHouse()) {
-		
-		}
-		else if(flush()) {
-			
-		}
-		else if(streight()) {
-			
-		}
-		else if(threeOfAKind()) {
-			
-		}
-		else if(twoPairs()) {
-			
-		}
-		else if(pair()) {
-			
-		}
-		
-		
-		return false;
-	}
+//	public boolean greaterThan(Deck d) {
+//		if(royalStreightFlush()) {
+//
+//		}
+//		else if(streightFlush()) {
+//			
+//		}
+//		else if(fourOfAKind()) {
+//			
+//		}
+//		else if(fullHouse()) {
+//		
+//		}
+//		else if(flush()) {
+//			
+//		}
+//		else if(streight()) {
+//			
+//		}
+//		else if(threeOfAKind()) {
+//			
+//		}
+//		else if(twoPairs()) {
+//			
+//		}
+//		else if(pair()) {
+//			
+//		}
+//		
+//		
+//		return false;
+//	}
 	
 	@Override
 	public String toString() {
