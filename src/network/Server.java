@@ -12,6 +12,21 @@ public class Server {
 	private ObjectInputStream input;
 	private ServerSocket server;
 	private Socket connection;
+	private boolean connected = false;
+	private Thread connectThread = new Thread(new Runnable() {
+		public void run() {
+			try {
+				connection = server.accept();
+				output = new ObjectOutputStream(connection.getOutputStream());
+				output.flush();
+				input = new ObjectInputStream(connection.getInputStream());
+				connected = true;
+			}
+			catch(IOException e) {
+				System.out.println("Server could not connect");
+			}
+		}
+	});
 	
 	public Server() {
 		try {
@@ -22,11 +37,8 @@ public class Server {
 		}
 	}
 	
-	public void start() throws IOException {
-		connection = server.accept();
-		output = new ObjectOutputStream(connection.getOutputStream());
-		output.flush();
-		input = new ObjectInputStream(connection.getInputStream());
+	public void start() {
+		connectThread.start();
 	}
 	
 	public void stop() {
@@ -36,39 +48,19 @@ public class Server {
 			connection.close();
 		}
 		catch(IOException e) {
-			e.printStackTrace();
+			System.out.println("Server could not close connection");
 		}
 	}
 	
 	public void sendMessage(String message) {
-		try {
-			output.writeObject(message);
-			output.flush();
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public String getMessage() {
-		try {
-			PushbackInputStream buf = new PushbackInputStream(input);
-			int b = buf.read();
-			if(b != -1) {
-				buf.unread(b);
-				
-				return (String)input.readObject();
+		if(connected) {
+			try {
+				output.writeObject(message);
+				output.flush();
 			}
-			else
-				return "";
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-			return "";
-		}
-		catch(ClassNotFoundException e) {
-			e.printStackTrace();
-			return "";
+			catch(IOException e) {
+				System.out.println("Server could not send message");
+			}
 		}
 	}
 }
